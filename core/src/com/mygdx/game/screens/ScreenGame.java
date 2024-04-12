@@ -178,7 +178,7 @@ public class ScreenGame implements Screen {
     void initPlatforms() {
         String[] strings = new String[]{"platforms/platform1.png", "platforms/platform2.png"};
         platforms = new Platform[platformsCount];
-        platforms[0] = new Platform(strings[myGdxGame.screenLevel.select_world], SCR_WIDTH / 2 - 50, SCR_HEIGHT / 2 - 100, 400, 100);
+        platforms[0] = new Platform(strings[myGdxGame.screenLevel.select_world], SCR_WIDTH / 2 - 50, SCR_HEIGHT / 2 - 120, 400, 100);
         for (int i = 1; i < platformsCount; i++) {
             int a = (int) (random.nextInt() % 50 * Math.pow(-1, random.nextInt() % 2) + character.y);
             System.out.println(a);
