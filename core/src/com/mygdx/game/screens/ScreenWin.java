@@ -29,7 +29,7 @@ public class ScreenWin implements Screen {
         else if(gameCount <= 20)
             buttonNext = new TextButton("button/button_bg.png", 300, 400, "next world", myGdxGame);
         buttonExit = new TextButton("button/button_bg.png", 300, 200, "Exit", myGdxGame);
-        background = new MovingBackground("background/restart_bg.png");
+        background = new MovingBackground("background/restart_bg.png", 0);
     }
 
     @Override

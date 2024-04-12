@@ -30,14 +30,14 @@ public class ScreenLevel implements Screen {
             System.out.println(i + " " + x + " " + y);
         }
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
-        background = new MovingBackground(strings[select_world]);
+        background = new MovingBackground(strings[select_world], 0);
     }
 
     @Override
     public void show() {
         myGdxGame.camera.position.set(SCR_WIDTH/2, SCR_HEIGHT/2, 0);
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
-        background = new MovingBackground(strings[myGdxGame.screenLevel.select_world]);
+        background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 0);
     }
 
     @Override

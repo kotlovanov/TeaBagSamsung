@@ -27,7 +27,6 @@ public class ScreenGame implements Screen {
     TextButton buttonJump;
     Character character;
     MovingBackground background;
-//    MovingBackground background2;
     Platform platform1;
     Platform[] platforms;
     int platformsCount = 10;
@@ -42,12 +41,9 @@ public class ScreenGame implements Screen {
         buttonLeft = new TextButton("button/button_bg2.png", 50, 50, "<", myGdxGame);
         buttonJump = new TextButton("button/button_bg2.png", 1000, 50, "", myGdxGame);
 
-        platform1 = new Platform("platforms/finish.png",5000, 0, 100, SCR_HEIGHT);
-//        platform2 = new Platform("platforms/ground.png",SCR_WIDTH, 0, SCR_WIDTH, 100);
-//        platform3 = new Platform("platforms/platform1.png",SCR_WIDTH/3, 100, 300, 100);
+        platform1 = new Platform("platforms/finish.png",6600, 0, 100, SCR_HEIGHT);
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
-        background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 3);
-//        background2 = new MovingBackground("background/game_bg2.png", 5);
+        background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], -20);
         character = new Character(SCR_WIDTH / 2, SCR_HEIGHT / 2, 10, 10, 75, 225, false);
         initPlatforms();
     }
@@ -61,7 +57,7 @@ public class ScreenGame implements Screen {
         character.setX(SCR_WIDTH / 2);
         initPlatforms();
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
-        background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 3);
+        background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 2);
     }
 
     @Override
@@ -71,12 +67,6 @@ public class ScreenGame implements Screen {
             myGdxGame.screenRestart.gamePoints = gamePoints;
             myGdxGame.setScreen(myGdxGame.screenRestart);
         }
-
-//        if (Gdx.input.justTouched()) {
-//            character.onClick();
-//        }
-//        character.a = 2;
-//        if (Gdx.input.justTouched()) {
         Vector3 touch = myGdxGame.camera.unproject(
                 new Vector3(Gdx.input.getX(0), Gdx.input.getY(0), 0)
         );
@@ -107,12 +97,6 @@ public class ScreenGame implements Screen {
         else character.forJump = true;
         myGdxGame.camera.position.set(character.x, SCR_HEIGHT/2, 0);
 
-//        }
-//        else character.a = 2;
-
-//        background.move(character.a, myGdxGame, character.x);
-//        background2.move(character.a, myGdxGame, character.x);
-
         character.move();
 
         character.jump();
@@ -129,9 +113,9 @@ public class ScreenGame implements Screen {
             character.flag = character.stop(platform.x, platform.y, platform.width, platform.height);
             if(character.flag != 0) break;
         }
-        if (character.x >= 5000) myGdxGame.setScreen(myGdxGame.screenWin);
+        if (character.flag == 0) background.move(character.a, myGdxGame, character.x);
+        if (character.x >= 6600) myGdxGame.setScreen(myGdxGame.screenWin);
 
-//        System.out.println(character.isStop);
 
         ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
@@ -139,11 +123,8 @@ public class ScreenGame implements Screen {
         myGdxGame.batch.begin();
 
         background.draw(myGdxGame);
-//        background2.draw(myGdxGame);
 
         platform1.draw(myGdxGame.batch);
-//        platform2.draw(myGdxGame.batch);
-//        platform3.draw(myGdxGame.batch);
         for (int i = 0; i < platformsCount; i++) {
             platforms[i].draw(myGdxGame.batch);
         }
@@ -178,13 +159,9 @@ public class ScreenGame implements Screen {
 
     @Override
     public void dispose() {
-//        character.dispose();
         background.dispose();
-//        background2.dispose();
 
         platform1.dispose();
-//        platform2.dispose();
-//        platform3.dispose();
         for (int i = 0; i < platformsCount; i++) {
             platforms[i].dispose();
         }
