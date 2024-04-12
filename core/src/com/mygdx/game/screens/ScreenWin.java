@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.characters.Platform;
 import com.mygdx.game.components.MovingBackground;
 import com.mygdx.game.components.TextButton;
 
@@ -17,33 +18,29 @@ public class ScreenWin implements Screen {
     MyGdxGame myGdxGame;
 
     MovingBackground background;
-    TextButton buttonNext;
     TextButton buttonExit;
-    int gameCount = 9;
+    Platform platform1;
+    Platform platform2;
+    int gameCount = 0;
+    int count = 0;
 
     public ScreenWin(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        if (gameCount <= 10)
-            buttonNext = new TextButton("button/button_bg.png", 300, 400, "next game", myGdxGame);
-        else if (gameCount <= 20)
-            buttonNext = new TextButton("button/button_bg.png", 300, 400, "next world", myGdxGame);
         buttonExit = new TextButton("button/button_bg.png", 300, 200, "Exit", myGdxGame);
-        background = new MovingBackground("background/restart_bg.png", 0);
+        String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
+        background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 0);
     }
 
     @Override
     public void show() {
         gameCount++;
-        if (gameCount < 10)
-            buttonNext = new TextButton("button/button_bg.png", 300, 400, "next game", myGdxGame);
-        else {
-            if (myGdxGame.screenLevel.select_world == myGdxGame.screenLevel.count_world) {
-                buttonNext = new TextButton("button/button_bg.png", 300, 400, "exit", myGdxGame);
-            } else
-                buttonNext = new TextButton("button/button_bg.png", 300, 400, "next world", myGdxGame);
-            myGdxGame.screenLevel.select_world += 1;
-            gameCount = 0;
-        }
+        String[] strings = new String[]{"cages/pups1_1.png", "cages/pups2_1.png"};
+        platform1 = new Platform(strings[myGdxGame.screenLevel.select_world], 700, 200, 300, 300);
+        String[] strings2 = new String[]{"cages/cage1.png", "cages/cage2.png"};
+        platform2 = new Platform(strings2[myGdxGame.screenLevel.select_world], 650, 150, 400, 400);
+        String[] strings3 = new String[]{"background/game_bg.png", "background/game_bg2.png"};
+        background = new MovingBackground(strings3[myGdxGame.screenLevel.select_world], 0);
+//            myGdxGame.screenLevel.select_world = myGdxGame.screenLevel.select_world % myGdxGame.screenLevel.count_world;
         myGdxGame.camera.position.set(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0);
     }
 
@@ -56,12 +53,6 @@ public class ScreenWin implements Screen {
             Vector3 touch = myGdxGame.camera.unproject(
                     new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)
             );
-
-            if (buttonNext.isHit(myGdxGame, (int) touch.x, (int) touch.y)) {
-                if (myGdxGame.screenLevel.select_world == myGdxGame.screenLevel.count_world && gameCount > 10) {
-                    myGdxGame.setScreen(myGdxGame.screenMenu);
-                } else myGdxGame.setScreen(myGdxGame.screenGame);
-            }
             if (buttonExit.isHit(myGdxGame, (int) touch.x, (int) touch.y)) {
                 myGdxGame.setScreen(myGdxGame.screenMenu);
             }
@@ -73,8 +64,32 @@ public class ScreenWin implements Screen {
         myGdxGame.batch.begin();
 
         background.draw(myGdxGame);
-        buttonNext.draw(myGdxGame);
         buttonExit.draw(myGdxGame);
+
+        if (gameCount == 10) {
+            platform1.draw(myGdxGame.batch);
+            platform2.draw(myGdxGame.batch);
+            platform2.x += 5;
+            String[] strings = new String[]{"cages/pups1_2.png", "cages/pups2_2.png"};
+            if (platform2.x > SCR_WIDTH) {
+                platform1 = new Platform(strings[myGdxGame.screenLevel.select_world], 700, 200, 300, 300);
+                count++;
+                if (count == 60) {
+                    count = 0;
+                    gameCount = 0;
+                    myGdxGame.screenLevel.select_world += 1;
+                    myGdxGame.setScreen(myGdxGame.screenGame);
+                }
+            }
+        }
+        else {
+            count++;
+            if (count == 60) {
+                count = 0;
+                myGdxGame.setScreen(myGdxGame.screenGame);
+            }
+        }
+
 
         myGdxGame.batch.end();
     }
@@ -102,7 +117,6 @@ public class ScreenWin implements Screen {
     @Override
     public void dispose() {
         background.dispose();
-        buttonNext.dispose();
         buttonExit.dispose();
     }
 }

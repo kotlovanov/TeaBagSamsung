@@ -31,7 +31,6 @@ public class ScreenGame implements Screen {
     Platform[] platforms;
     int platformsCount = 10;
 
-    int gamePoints;
     boolean isGameOver;
 
     public ScreenGame(MyGdxGame myGdxGame) {
@@ -40,18 +39,17 @@ public class ScreenGame implements Screen {
         buttonRight = new TextButton("button/button_bg2.png", 200, 50, ">", myGdxGame);
         buttonLeft = new TextButton("button/button_bg2.png", 50, 50, "<", myGdxGame);
         buttonJump = new TextButton("button/button_bg2.png", 1000, 50, "", myGdxGame);
-
-        platform1 = new Platform("platforms/finish.png", 6600, 0, 100, SCR_HEIGHT);
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
         background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 2);
         character = new Character(SCR_WIDTH / 2, SCR_HEIGHT / 2, 10, 10, 75, 225, false);
+
         initPlatforms();
+        platform1 = new Platform("platforms/finish.png", 6600, 0, 100, SCR_HEIGHT);
     }
 
 
     @Override
     public void show() {
-        gamePoints = 0;
         isGameOver = false;
         character.setY(SCR_HEIGHT / 2);
         character.setX(SCR_WIDTH / 2);
@@ -64,7 +62,6 @@ public class ScreenGame implements Screen {
     public void render(float delta) {
 
         if (isGameOver) {
-            myGdxGame.screenRestart.gamePoints = gamePoints;
             myGdxGame.setScreen(myGdxGame.screenRestart);
         }
         Vector3 touch = myGdxGame.camera.unproject(
@@ -179,11 +176,15 @@ public class ScreenGame implements Screen {
         String[] strings = new String[]{"platforms/platform1.png", "platforms/platform2.png"};
         platforms = new Platform[platformsCount];
         platforms[0] = new Platform(strings[myGdxGame.screenLevel.select_world], SCR_WIDTH / 2 - 50, SCR_HEIGHT / 2 - 120, 400, 100);
+        int oldY = SCR_HEIGHT / 2 - 120;
         for (int i = 1; i < platformsCount; i++) {
-            int a = (int) (random.nextInt() % 50 * Math.pow(-1, random.nextInt() % 2) + character.y);
-            System.out.println(a);
+            int y = (int) (random.nextInt() % 100 * Math.pow(-1, random.nextInt() % 2) + oldY);
+            if (y >= SCR_HEIGHT) y -= 100;
+            if (y <= 0) y += 100;
+            System.out.println(y);
 //            int a = 200;
-            platforms[i] = new Platform(strings[myGdxGame.screenLevel.select_world], (i + 1) * 600, a, 400, 100);
+            platforms[i] = new Platform(strings[myGdxGame.screenLevel.select_world], (i + 1) * 600 - y + oldY, y, 400, 100);
+            oldY = y;
         }
     }
 

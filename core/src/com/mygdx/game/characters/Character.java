@@ -80,7 +80,6 @@ public class Character {
 
     public boolean isInField() {
         if (y + height < 0) return false;
-        if (y > SCR_HEIGHT) return false;
         return true;
     }
 
