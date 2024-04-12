@@ -11,6 +11,7 @@ public class Platform {
     public int width;
     public int height;
     public int x, y;
+
     public Platform(String texture, int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -18,6 +19,7 @@ public class Platform {
         this.height = height;
         tPlatform = new Texture(texture);
     }
+
     public void draw(Batch batch) {
         batch.draw(tPlatform, x, y, width, height);
     }

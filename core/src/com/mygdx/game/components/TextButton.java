@@ -39,6 +39,7 @@ public class TextButton {
         textX = x + (buttonWidth - textWidth) / 2;
         textY = y + (buttonHeight + textHeight) / 2;
     }
+
     public TextButton(String tTexture, int x, int y, String text, MyGdxGame myGdxGame) {
         this.text = text;
         this.x = x;
@@ -71,7 +72,7 @@ public class TextButton {
         int newX = (int) (x - buttonWidth / 2 - MyGdxGame.SCR_WIDTH / 2 + myGdxGame.camera.position.x);
         int newY = (int) (y - buttonHeight / 2 - MyGdxGame.SCR_HEIGHT / 2 + myGdxGame.camera.position.y);
         textX = (newX + (buttonWidth - textWidth) / 2);
-        textY = newY + (buttonHeight + textHeight) / 2 ;
+        textY = newY + (buttonHeight + textHeight) / 2;
         myGdxGame.batch.draw(texture, newX, newY, buttonWidth, buttonHeight);
         font.draw(myGdxGame.batch, text, textX, textY);
     }

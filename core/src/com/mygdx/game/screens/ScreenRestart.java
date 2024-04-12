@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.components.MovingBackground;
-import com.mygdx.game.components.PointCounter;
 import com.mygdx.game.components.TextButton;
 
 
@@ -20,14 +19,11 @@ public class ScreenRestart implements Screen {
     MovingBackground background;
     TextButton buttonRestart;
     TextButton buttonExit;
-    PointCounter pointCounter;
 
     int gamePoints;
 
     public ScreenRestart(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-
-        pointCounter = new PointCounter(750, 530);
         buttonRestart = new TextButton("button/button_bg.png", 400, 400, "Restart", myGdxGame);
         buttonExit = new TextButton("button/button_bg.png", 400, 100, "Exit", myGdxGame);
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
@@ -36,14 +32,14 @@ public class ScreenRestart implements Screen {
 
     @Override
     public void show() {
-        myGdxGame.camera.position.set(SCR_WIDTH/2, SCR_HEIGHT/2, 0);
+        myGdxGame.camera.position.set(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0);
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
         background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 0);
     }
 
     @Override
     public void render(float delta) {
-        myGdxGame.camera.position.set(SCR_WIDTH/2, SCR_HEIGHT/2, 0);
+        myGdxGame.camera.position.set(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0);
 
         if (Gdx.input.justTouched()) {
 
@@ -67,7 +63,6 @@ public class ScreenRestart implements Screen {
         background.draw(myGdxGame);
         buttonRestart.draw(myGdxGame);
         buttonExit.draw(myGdxGame);
-        pointCounter.draw(myGdxGame.batch, gamePoints);
 
         myGdxGame.batch.end();
     }

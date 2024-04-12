@@ -41,7 +41,7 @@ public class ScreenGame implements Screen {
         buttonLeft = new TextButton("button/button_bg2.png", 50, 50, "<", myGdxGame);
         buttonJump = new TextButton("button/button_bg2.png", 1000, 50, "", myGdxGame);
 
-        platform1 = new Platform("platforms/finish.png",6600, 0, 100, SCR_HEIGHT);
+        platform1 = new Platform("platforms/finish.png", 6600, 0, 100, SCR_HEIGHT);
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
         background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 2);
         character = new Character(SCR_WIDTH / 2, SCR_HEIGHT / 2, 10, 10, 75, 225, false);
@@ -77,25 +77,26 @@ public class ScreenGame implements Screen {
         if (Gdx.input.isTouched(0)) {
             if (buttonLeft.isHit(myGdxGame, (int) touch.x, (int) touch.y)) {
                 character.forMove(1);
-            }  if (buttonRight.isHit(myGdxGame, (int) touch.x, (int) touch.y)) {
+            }
+            if (buttonRight.isHit(myGdxGame, (int) touch.x, (int) touch.y)) {
                 character.forMove(-1);
-            } if (buttonJump.isHit(myGdxGame, (int) touch.x, (int) touch.y)) {
+            }
+            if (buttonJump.isHit(myGdxGame, (int) touch.x, (int) touch.y)) {
                 character.onClick();
             }
-        }
-        else character.forJump = true;
+        } else character.forJump = true;
         if (Gdx.input.isTouched(1)) {
             if (buttonLeft.isHit(myGdxGame, (int) touch2.x, (int) touch2.y)) {
                 character.forMove(1);
-            } if (buttonRight.isHit(myGdxGame, (int) touch2.x, (int) touch2.y)) {
+            }
+            if (buttonRight.isHit(myGdxGame, (int) touch2.x, (int) touch2.y)) {
                 character.forMove(-1);
-            } if (buttonJump.isHit(myGdxGame, (int) touch2.x, (int) touch2.y)) {
+            }
+            if (buttonJump.isHit(myGdxGame, (int) touch2.x, (int) touch2.y)) {
                 character.onClick();
             }
-        }
-
-        else character.forJump = true;
-        myGdxGame.camera.position.set(character.x, SCR_HEIGHT/2, 0);
+        } else character.forJump = true;
+        myGdxGame.camera.position.set(character.x, SCR_HEIGHT / 2, 0);
 
         character.move();
 
@@ -106,12 +107,15 @@ public class ScreenGame implements Screen {
 
 
         for (Platform platform : platforms) {
-            if (character.isHit(platform.x, platform.y, platform.width, platform.height)) {character.isStop = true; break;}
+            if (character.isHit(platform.x, platform.y, platform.width, platform.height)) {
+                character.isStop = true;
+                break;
+            }
             character.isStop = false;
         }
         for (Platform platform : platforms) {
             character.flag = character.stop(platform.x, platform.y, platform.width, platform.height);
-            if(character.flag != 0) break;
+            if (character.flag != 0) break;
         }
         if (character.flag == 0) background.move(character.a, myGdxGame, character.x);
         if (character.x >= 6600) myGdxGame.setScreen(myGdxGame.screenWin);
@@ -170,15 +174,16 @@ public class ScreenGame implements Screen {
         buttonLeft.dispose();
         buttonJump.dispose();
     }
+
     void initPlatforms() {
         String[] strings = new String[]{"platforms/platform1.png", "platforms/platform2.png"};
         platforms = new Platform[platformsCount];
-        platforms[0] = new Platform(strings[myGdxGame.screenLevel.select_world],SCR_WIDTH/2-50, SCR_HEIGHT / 2-100, 400, 100);
+        platforms[0] = new Platform(strings[myGdxGame.screenLevel.select_world], SCR_WIDTH / 2 - 50, SCR_HEIGHT / 2 - 100, 400, 100);
         for (int i = 1; i < platformsCount; i++) {
             int a = (int) (random.nextInt() % 50 * Math.pow(-1, random.nextInt() % 2) + character.y);
             System.out.println(a);
 //            int a = 200;
-            platforms[i] = new Platform(strings[myGdxGame.screenLevel.select_world],(i+1)*600, a, 400, 100);
+            platforms[i] = new Platform(strings[myGdxGame.screenLevel.select_world], (i + 1) * 600, a, 400, 100);
         }
     }
 

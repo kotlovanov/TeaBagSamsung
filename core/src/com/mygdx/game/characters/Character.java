@@ -19,7 +19,7 @@ public class Character {
     final int maxHeightOfJump = 150;
     boolean jump = false;
     public boolean isStop;
-    public  int a, oldA;
+    public int a, oldA;
     public boolean forJump = true;
     public int flag = 0;
 
@@ -37,12 +37,7 @@ public class Character {
         this.isStop = isStop;
         frameCounter = 0;
 
-        framesArray = new Sprite[]{
-                new Sprite(new Texture("birdTiles/char1.png")),
-                new Sprite(new Texture("birdTiles/char2.png")),
-                new Sprite(new Texture("birdTiles/char3.png")),
-                new Sprite(new Texture("birdTiles/char4.png"))
-        };
+        framesArray = new Sprite[]{new Sprite(new Texture("characterTiles/char1.png")), new Sprite(new Texture("characterTiles/char2.png")), new Sprite(new Texture("characterTiles/char3.png")), new Sprite(new Texture("characterTiles/char4.png"))};
     }
 
     public void setY(int y) {
@@ -69,16 +64,16 @@ public class Character {
 
         if (jump) {
             y += speed;
-        }
-         else if (!(isStop)) {
+        } else if (!(isStop)) {
             y -= speed;
         }
     }
+
     public void move() {
-        if (-flag != a)
-            x -= a * speed;
+        if (-flag != a) x -= a * speed;
 
     }
+
     public void forMove(int a) {
         this.a = a;
     }
@@ -91,27 +86,30 @@ public class Character {
 
     public void draw(Batch batch) {
         int frameMultiplier = 10;
-        if(a == -1) flipX(false);
-        else if(a == 1) flipX(true);
-        if (a!=0) {
+        if (a == -1) flipX(false);
+        else if (a == 1) flipX(true);
+        if (a != 0) {
             batch.draw(framesArray[frameCounter / frameMultiplier], x, y, width, height);
             if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
-        }
-        else batch.draw(framesArray[0], x, y, width, height);
+        } else batch.draw(framesArray[0], x, y, width, height);
     }
 
     void flipX(boolean rotate) {
-    for(Sprite sprite : framesArray) {
-        sprite.setFlip(rotate, false);
+        for (Sprite sprite : framesArray) {
+            sprite.setFlip(rotate, false);
+        }
     }
-}
+
     public int stop(int px, int py, int pwidth, int pHeight) {
-        if (x + width > px && x + width <= px + 10 && (y + height > py && y < py + pHeight)) return 1;
-        else if (x > px + pwidth && x <= px + pwidth + 10 && (y + height > py && y < py + pHeight)) return -1;
+        if (x + width > px && x + width <= px + 10 && (y + height > py && y < py + pHeight))
+            return 1;
+        else if (x > px + pwidth && x <= px + pwidth + 10 && (y + height > py && y < py + pHeight))
+            return -1;
         else return 0;
     }
+
     public boolean isHit(int px, int py, int pwidth, int pheight) {
-        if ((x + width -10 >= px && x - 10 <= px + pwidth) && (y <= py + pheight && y > py))
+        if ((x + width - 10 >= px && x - 10 <= px + pwidth) && (y <= py + pheight && y > py))
             return true;
         return false;
     }

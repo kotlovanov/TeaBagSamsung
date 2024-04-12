@@ -1,10 +1,8 @@
 package com.mygdx.game.components;
 
-import static com.mygdx.game.MyGdxGame.SCR_HEIGHT;
 import static com.mygdx.game.MyGdxGame.SCR_WIDTH;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.game.MyGdxGame;
 
 
@@ -30,17 +28,17 @@ public class MovingBackground {
         texture2X += a;
 
 
-        if (texture1X <= -MyGdxGame.SCR_WIDTH + (x - SCR_WIDTH/2)) {
+        if (texture1X <= -MyGdxGame.SCR_WIDTH + (x - SCR_WIDTH / 2)) {
             texture1X += SCR_WIDTH * 2;
         }
-        if (texture2X <= -MyGdxGame.SCR_WIDTH + (x - SCR_WIDTH/2)) {
+        if (texture2X <= -MyGdxGame.SCR_WIDTH + (x - SCR_WIDTH / 2)) {
             texture2X += SCR_WIDTH * 2;
         }
 
-        if (texture1X > MyGdxGame.SCR_WIDTH + (x - SCR_WIDTH/2)) {
+        if (texture1X > MyGdxGame.SCR_WIDTH + (x - SCR_WIDTH / 2)) {
             texture1X -= SCR_WIDTH * 2;
         }
-        if (texture2X > MyGdxGame.SCR_WIDTH + (x - SCR_WIDTH/2)) {
+        if (texture2X > MyGdxGame.SCR_WIDTH + (x - SCR_WIDTH / 2)) {
             texture2X -= SCR_WIDTH * 2;
         }
     }

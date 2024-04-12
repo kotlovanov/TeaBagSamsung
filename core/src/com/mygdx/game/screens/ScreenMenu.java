@@ -9,16 +9,15 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.components.MovingBackground;
-import com.mygdx.game.components.PointCounter;
 import com.mygdx.game.components.TextButton;
 
 public class ScreenMenu implements Screen {
     MyGdxGame myGdxGame;
 
-
     TextButton buttonGame;
     TextButton buttonExit;
     MovingBackground background;
+
     public ScreenMenu(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         buttonGame = new TextButton("button/button_bg.png", 400, 400, "Play", myGdxGame);
@@ -29,7 +28,7 @@ public class ScreenMenu implements Screen {
 
     @Override
     public void show() {
-        myGdxGame.camera.position.set(SCR_WIDTH/2, SCR_HEIGHT/2, 0);
+        myGdxGame.camera.position.set(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0);
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
         background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 0);
     }

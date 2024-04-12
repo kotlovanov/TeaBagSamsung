@@ -17,16 +17,17 @@ public class ScreenLevel implements Screen {
     public int select_world = 0;
     TextButton[] worldList;
     MovingBackground background;
+
     public ScreenLevel(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         int i;
         int x, y;
         count_world = 2;
         worldList = new TextButton[count_world];
-        for(i = 0; i <= count_world-1; i++) {
-            x = ((i/5))*500;
-            y = (i - (x/500)*5)*150;
-            worldList[i] = new TextButton("button/button_bg.png", x+300, 600-y, "world " + i, 400, 100, myGdxGame);
+        for (i = 0; i <= count_world - 1; i++) {
+            x = ((i / 5)) * 500;
+            y = (i - (x / 500) * 5) * 150;
+            worldList[i] = new TextButton("button/button_bg.png", x + 300, 600 - y, "world " + i, 400, 100, myGdxGame);
             System.out.println(i + " " + x + " " + y);
         }
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
@@ -35,7 +36,7 @@ public class ScreenLevel implements Screen {
 
     @Override
     public void show() {
-        myGdxGame.camera.position.set(SCR_WIDTH/2, SCR_HEIGHT/2, 0);
+        myGdxGame.camera.position.set(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0);
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
         background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 0);
     }
@@ -47,12 +48,12 @@ public class ScreenLevel implements Screen {
             Vector3 touch = myGdxGame.camera.unproject(
                     new Vector3(Gdx.input.getX(0), Gdx.input.getY(0), 0)
             );
-            for (i = 0; i <= count_world-1; i++) {
-            if (worldList[i].isHit(myGdxGame, (int) touch.x, (int) touch.y)) {
-                select_world = i;
-                myGdxGame.setScreen(myGdxGame.screenGame);
+            for (i = 0; i <= count_world - 1; i++) {
+                if (worldList[i].isHit(myGdxGame, (int) touch.x, (int) touch.y)) {
+                    select_world = i;
+                    myGdxGame.setScreen(myGdxGame.screenGame);
+                }
             }
-        }
         }
         ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
@@ -60,7 +61,7 @@ public class ScreenLevel implements Screen {
         myGdxGame.batch.begin();
 //        background.move(-1, myGdxGame, 0);
         background.draw(myGdxGame);
-        for (i = 0; i <= count_world-1; i++) {
+        for (i = 0; i <= count_world - 1; i++) {
             worldList[i].draw(myGdxGame);
         }
 
