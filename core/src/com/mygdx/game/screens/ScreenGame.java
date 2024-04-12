@@ -43,7 +43,7 @@ public class ScreenGame implements Screen {
 
         platform1 = new Platform("platforms/finish.png",6600, 0, 100, SCR_HEIGHT);
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
-        background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], -20);
+        background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 2);
         character = new Character(SCR_WIDTH / 2, SCR_HEIGHT / 2, 10, 10, 75, 225, false);
         initPlatforms();
     }
