@@ -22,7 +22,7 @@ public class ScreenWin implements Screen {
     Platform platform1;
     Platform platform2;
     Platform platform;
-    int gameCount = 4;
+    int gameCount = 0;
     int count = 0, count2 = 0;
     String[] string = new String[]{"win/1.png",
             "win/2.png",
