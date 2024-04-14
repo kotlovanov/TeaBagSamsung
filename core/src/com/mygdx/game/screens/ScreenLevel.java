@@ -26,8 +26,8 @@ public class ScreenLevel implements Screen {
         worldList = new TextButton[count_world];
         for (i = 0; i <= count_world - 1; i++) {
             x = ((i / 5)) * 500;
-            y = (i - (x / 500) * 5) * 150;
-            worldList[i] = new TextButton("button/button_bg.png", x + 300, 600 - y, "world " + i, 400, 100, myGdxGame);
+            y = (i - (x / 500) * 5) * 150 + 100;
+            worldList[i] = new TextButton("button/" + (i+1) + ".png", x + 600, 600 - y, "", 300, 300, myGdxGame);
             System.out.println(i + " " + x + " " + y);
         }
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png", "background/game_bg3.jpg"};

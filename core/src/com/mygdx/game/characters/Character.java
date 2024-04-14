@@ -100,15 +100,15 @@ public class Character {
     }
 
     public int stop(int px, int py, int pwidth, int pHeight) {
-        if (x + width > px && x + width <= px + 10 && (y + height > py && y < py + pHeight))
+        if (x + width > px && x + width <= px + 10 && (y + height > py && y - 1 < py + pHeight))
             return 1;
-        else if (x > px + pwidth && x <= px + pwidth + 10 && (y + height > py && y < py + pHeight))
+        else if (x > px + pwidth && x <= px + pwidth + 10 && (y + height > py && y - 1 < py + pHeight))
             return -1;
         else return 0;
     }
 
     public boolean isHit(int px, int py, int pwidth, int pheight) {
-        if ((x + width - 10 >= px && x - 10 <= px + pwidth) && (y <= py + pheight && y > py))
+        if ((x + width - 5 > px && x + 5 < px + pwidth) && (y <= py + pheight && y + height >= py))
             return true;
         return false;
     }

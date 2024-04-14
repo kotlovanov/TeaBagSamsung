@@ -21,8 +21,14 @@ public class ScreenWin implements Screen {
     TextButton buttonExit;
     Platform platform1;
     Platform platform2;
-    int gameCount = 9;
-    int count = 0;
+    Platform platform;
+    int gameCount = 4;
+    int count = 0, count2 = 0;
+    String[] string = new String[]{"win/1.png",
+            "win/2.png",
+            "win/3.png",
+            "win/4.png",
+            "win/5.png"};
 
     public ScreenWin(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -38,6 +44,7 @@ public class ScreenWin implements Screen {
         platform1 = new Platform(strings[myGdxGame.screenLevel.select_world], 700, 200, 300, 300);
         String[] strings2 = new String[]{"cages/cage1.png", "cages/cage2.png", "cages/cage3.png"};
         platform2 = new Platform(strings2[myGdxGame.screenLevel.select_world], 650, 150, 400, 400);
+        platform = new Platform(string[0], 650, 150, 400, 400);
         String[] strings3 = new String[]{"background/game_bg.png", "background/game_bg2.png", "background/game_bg3.jpg"};
         background = new MovingBackground(strings3[myGdxGame.screenLevel.select_world], 0);
 //            myGdxGame.screenLevel.select_world = myGdxGame.screenLevel.select_world % myGdxGame.screenLevel.count_world;
@@ -66,7 +73,7 @@ public class ScreenWin implements Screen {
         background.draw(myGdxGame);
         buttonExit.draw(myGdxGame);
 
-        if (gameCount == 10) {
+        if (gameCount == 5) {
             platform1.draw(myGdxGame.batch);
             platform2.draw(myGdxGame.batch);
             platform2.x += 5;
@@ -90,6 +97,10 @@ public class ScreenWin implements Screen {
                 myGdxGame.setScreen(myGdxGame.screenGame);
             }
         }
+        count2++;
+        platform = new Platform(string[count2 / 10], 0, SCR_HEIGHT-350, 800, 500);
+        platform.draw(myGdxGame.batch);
+        if (count2++ == string.length * 10 - 1) count2 = 0;
 
 
         myGdxGame.batch.end();

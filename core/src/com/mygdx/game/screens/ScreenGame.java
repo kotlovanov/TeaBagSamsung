@@ -36,9 +36,9 @@ public class ScreenGame implements Screen {
     public ScreenGame(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
 
-        buttonRight = new TextButton("button/button_bg2.png", 200, 50, ">", myGdxGame);
-        buttonLeft = new TextButton("button/button_bg2.png", 50, 50, "<", myGdxGame);
-        buttonJump = new TextButton("button/button_bg2.png", 1000, 50, "", myGdxGame);
+        buttonRight = new TextButton("button/button_bg2.png", 300, 100, ">", myGdxGame);
+        buttonLeft = new TextButton("button/button_bg2.png", 150, 100, "<", myGdxGame);
+        buttonJump = new TextButton("button/button_bg2.png", 1100, 100, "", myGdxGame);
         String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png", "background/game_bg3.jpg"};
         background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 2);
         character = new Character(SCR_WIDTH / 2, SCR_HEIGHT / 2, 10, 10, 75, 225, false);
