@@ -39,7 +39,7 @@ public class ScreenGame implements Screen {
         buttonRight = new TextButton("button/button_bg2.png", 200, 50, ">", myGdxGame);
         buttonLeft = new TextButton("button/button_bg2.png", 50, 50, "<", myGdxGame);
         buttonJump = new TextButton("button/button_bg2.png", 1000, 50, "", myGdxGame);
-        String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
+        String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png", "background/game_bg3.jpg"};
         background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 2);
         character = new Character(SCR_WIDTH / 2, SCR_HEIGHT / 2, 10, 10, 75, 225, false);
 
@@ -54,7 +54,7 @@ public class ScreenGame implements Screen {
         character.setY(SCR_HEIGHT / 2);
         character.setX(SCR_WIDTH / 2);
         initPlatforms();
-        String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
+        String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png", "background/game_bg3.jpg"};
         background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 2);
     }
 
@@ -173,7 +173,7 @@ public class ScreenGame implements Screen {
     }
 
     void initPlatforms() {
-        String[] strings = new String[]{"platforms/platform1.png", "platforms/platform2.png"};
+        String[] strings = new String[]{"platforms/platform1.png", "platforms/platform2.png", "platforms/platform3.png"};
         platforms = new Platform[platformsCount];
         platforms[0] = new Platform(strings[myGdxGame.screenLevel.select_world], SCR_WIDTH / 2 - 50, SCR_HEIGHT / 2 - 120, 400, 100);
         int oldY = SCR_HEIGHT / 2 - 120;

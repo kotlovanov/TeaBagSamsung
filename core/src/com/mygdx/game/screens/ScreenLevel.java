@@ -22,7 +22,7 @@ public class ScreenLevel implements Screen {
         this.myGdxGame = myGdxGame;
         int i;
         int x, y;
-        count_world = 2;
+        count_world = 3;
         worldList = new TextButton[count_world];
         for (i = 0; i <= count_world - 1; i++) {
             x = ((i / 5)) * 500;
@@ -30,14 +30,14 @@ public class ScreenLevel implements Screen {
             worldList[i] = new TextButton("button/button_bg.png", x + 300, 600 - y, "world " + i, 400, 100, myGdxGame);
             System.out.println(i + " " + x + " " + y);
         }
-        String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
+        String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png", "background/game_bg3.jpg"};
         background = new MovingBackground(strings[select_world], 0);
     }
 
     @Override
     public void show() {
         myGdxGame.camera.position.set(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0);
-        String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png"};
+        String[] strings = new String[]{"background/game_bg.png", "background/game_bg2.png", "background/game_bg3.jpg"};
         background = new MovingBackground(strings[myGdxGame.screenLevel.select_world], 0);
     }
 
