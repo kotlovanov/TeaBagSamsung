@@ -108,7 +108,7 @@ public class Character {
     }
 
     public boolean isHit(int px, int py, int pwidth, int pheight) {
-        if ((x + width - 5 > px && x + 5 < px + pwidth) && (y <= py + pheight && y + height >= py))
+        if ((x + width - 5 > px && x + 5 < px + pwidth) && (y <= py + pheight && y >= py + pheight - 10))
             return true;
         return false;
     }
